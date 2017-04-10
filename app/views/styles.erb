@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h2>Estilos de aprendizaje</h2>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <h3>Instrucciones</h3>
+    <p class="text-justify">
+      Debe conceder una calificación alta a aquellas palabras que mejor caracterizan la forma en que usted aprende, y, una calificación baja a las palabras que menos caracterizan su estilo de aprendizaje.
+      <br><br>
+      Ordene de mayor a menor cada serie o juego de cuatro palabras, ubicando 4 en la palabra que mejor caracteriza su estilo de aprendizaje, un 3 en la palabra siguiente en cuanto a la correspondencia con su estilo; a la siguiente un 2, y un 1 a la palabra que menos caracteriza su estilo. Tenga cuidado de ubicar un número distinto al lado de cada palabra.
+    </p>
+    <hr>
+  </div>
+
+  <div class="col-md-12">
+    <form class="form-horizontal">
+
+      <% learning_styles.each do |col_name, col| %>
+
+        <div class="col-md-3">
+          <div class="thumbnail">
+            <div class="caption">
+              <h4 class="text-center">
+                Columna <%= col_name.to_s.upcase %> 
+                <span class="badge" id="<%= col_name.to_s %>-result">6</span> 
+              </h4>
+
+              <% col.each_with_index do |subcol, index| %>
+                <div class="form-group">
+                  <select id="<%= col_name.to_s << '-' << index.to_s %>">
+                    
+                    <% 4.times do |i| %>
+                      <option value="<%= i + 1 %>"> <%= i + 1 %> </option>
+                    <% end %>
+
+                  </select>
+                  <label for="<%= col_name.to_s << '-' << index.to_s %>"><small> <%= subcol.capitalize %> </small></label>
+                </div>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+
+      <button type="button" class="btn btn-default btn-sm pull-right" id="calculateStyleBtn">Calcular</button>
+    </form>
+  </div>
+
+  <div class="col-md-12" id="stylesResults">
+    <hr>
+    <h3>Resultado <span class="label label-success" id="styleResult"> - </span></h3>
+    <p id="computingMessage">Computing...</p>
+
+    <div id="successInfo">
+
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse-save-style-info">
+                Si lo desea puede guardar sus resultados para el mejoramiento del algoritmo y brindar resultados mas acertados
+              </a>
+            </h4>
+          </div>
+          <div id="collapse-save-style-info" class="panel-collapse collapse">
+            <div class="panel-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="gender">Sexo</label>
+                  <select class="form-control" id="gender">
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="campus">Recinto (UCR)</label>
+                  <select class="form-control" id="campus">
+                    <option>Paraiso</option>
+                    <option>Turrialba</option>
+                  </select>
+                </div>
+
+                <p class="help-block" id="saveResultMsg"></p>
+                <button type="button" class="btn btn-default btn-sm pull-right" id="saveResultsBtn">Enviar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
