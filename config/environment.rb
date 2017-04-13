@@ -11,32 +11,34 @@ require 'sinatra/contrib/all'
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
 
-# Global Sinatra configuration
-configure do
-  set :root, APP_ROOT.to_path
-  set :server, :puma
+class Gallego < Sinatra::Application
+  # Global Sinatra configuration
+  configure do
+    set :root, APP_ROOT.to_path
+    set :server, :puma
 
-  enable :sessions
-  set :session_secret, ENV['SESSION_KEY'] || 'danielsecret'
+    enable :sessions
+    set :session_secret, ENV['SESSION_KEY'] || 'danielsecret'
 
-  set :views, File.join(Sinatra::Application.root, "app", "views")
+    set :views, proc { File.join(root, 'app', 'views') }
+  end
+
+  # Development and Test Sinatra Configuration
+  configure :development, :test do
+    require 'pry'
+  end
+
+  # Production Sinatra Configuration
+  configure :production do
+    # NOOP
+  end
+
+  # Set up the database and models
+  require APP_ROOT.join('config', 'database')
+
+  # Load the routes / actions
+  require APP_ROOT.join('app', 'actions')
+
+  # Load helpers
+  require_relative APP_ROOT.join('app', 'helpers', 'init')
 end
-
-# Development and Test Sinatra Configuration
-configure :development, :test do
-  require 'pry'
-end
-
-# Production Sinatra Configuration
-configure :production do
-  # NOOP
-end
-
-# Set up the database and models
-require APP_ROOT.join('config', 'database')
-
-# Load the routes / actions
-require APP_ROOT.join('app', 'actions')
-
-# Load helpers
-require APP_ROOT.join('app', 'helpers')

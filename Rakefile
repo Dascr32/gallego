@@ -1,4 +1,4 @@
-require "sinatra/activerecord/rake"
+require 'sinatra/activerecord/rake'
 
 namespace :db do
   task :load_config do
@@ -10,4 +10,3 @@ namespace :db do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
 end
-

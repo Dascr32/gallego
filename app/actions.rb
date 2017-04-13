@@ -15,16 +15,16 @@ post '/styles/save.json' do
   @style = LearningStyle.create(campus: params[:campus],
                                 ec:     params[:ec],
                                 or:     params[:or],
-                                ca:     params[:ca], 
+                                ca:     params[:ca],
                                 ea:     params[:ea],
                                 ca_ec:  params[:ca_ec],
                                 ea_or:  params[:ea_or],
                                 style:  params[:style])
-  if @style.save
-    response = {code: 201, status: 'created'}
-  else
-    response = {code: 400, status: 'error'}
-  end
+  response = if @style.save
+               { code: 201, status: 'created' }
+             else
+               { code: 400, status: 'error' }
+             end
 
   json response
 end

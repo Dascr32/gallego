@@ -4,16 +4,11 @@ configure :development do
 end
 
 configure :development, :test do
-  set :database, {
-    'development' => {
-      'adapter' => 'sqlite3',
-      'database' => APP_ROOT.join('db', 'development.sqlite3')
-    },
-    'test' => {
-      'adapter' => 'sqlite3',
-      'database' => APP_ROOT.join('db', 'test.sqlite3')
-    }
-  }
+  set :database,
+      development: { adapter: 'sqlite3',
+                     database: APP_ROOT.join('db', 'development.sqlite3') },
+      test:        { adapter:  'sqlite3',
+                     database: APP_ROOT.join('db', 'test.sqlite3') }
 end
 
 configure :production do

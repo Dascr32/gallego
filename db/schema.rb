@@ -11,16 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170408065252) do
-
-  create_table "learning_styles", force: :cascade do |t|
-    t.string  "campus"
-    t.integer "ca"
-    t.integer "ec"
-    t.integer "ea"
-    t.integer "or"
-    t.integer "ca_ec"
-    t.integer "ea_or"
-    t.string  "style"
+  create_table 'learning_styles', force: :cascade do |t|
+    t.string  'campus'
+    t.integer 'ca'
+    t.integer 'ec'
+    t.integer 'ea'
+    t.integer 'or'
+    t.integer 'ca_ec'
+    t.integer 'ea_or'
+    t.string  'style'
   end
-
 end
