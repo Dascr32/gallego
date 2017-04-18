@@ -19,12 +19,12 @@ module Helpers
       students = Student.all
       distances = {}
 
-      # Get distance of style & gender (strings)
-      values[0] = to_dist(values[0])
-      values[1] = to_dist(values[1])
+      # Get points of style & gender (strings)
+      values[0] = to_point(values[0])
+      values[1] = to_point(values[1])
 
       students.each do |student|
-        student_values = [to_dist(student.style), to_dist(student.gender), student.gpa]
+        student_values = [to_point(student.style), to_point(student.gender), student.gpa]
         distances[student.id] = euclidean_distance(values, student_values)
       end
       Student.find(distances.key(knn(distances.values, 1).first))
@@ -45,7 +45,7 @@ module Helpers
 
     private
 
-    def to_dist(key)
+    def to_point(key)
       STYLES_POINTS.merge(GENDERS_POINTS).fetch(key.downcase.to_sym)
     end
   end
