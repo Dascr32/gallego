@@ -1,8 +1,8 @@
 require_relative 'partials'
-Gallego.helpers Partials
-
-require_relative 'algorithms'
-Gallego.helpers Algorithms
+Gallego.helpers Helpers::Partials
 
 require_relative 'static_data'
-Gallego.helpers StaticData
+Gallego.helpers Helpers::StaticData
+
+require_relative 'algorithms'
+Gallego.helpers Helpers::Algorithms
