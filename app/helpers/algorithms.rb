@@ -45,8 +45,8 @@ module Helpers
 
     private
 
-    def to_dist(value)
-      STYLES_POINTS.merge(GENDERS_POINTS).fetch(value.downcase.to_sym)
+    def to_dist(key)
+      STYLES_POINTS.merge(GENDERS_POINTS).fetch(key.downcase.to_sym)
     end
   end
 end
