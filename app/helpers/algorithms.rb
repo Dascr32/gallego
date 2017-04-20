@@ -30,7 +30,7 @@ module Helpers
     def euclidean_distance(vector1, vector2)
       sum = 0
       vector1.zip(vector2).each do |subset|
-        subset_nums = subset.map { |i| i.is_a?(String) ? to_f_or_i(i) : i }
+        subset_nums = subset.map { |i| i.is_a?(String) ? to_i_or_f(i) : i }
         sum += subset_nums.reduce(:-)**2
       end
       Math.sqrt(sum)
@@ -63,8 +63,8 @@ module Helpers
                    .fetch(key.downcase.to_sym)
     end
 
-    def to_f_or_i(string)
-        string.match('\.').nil? ? string.to_i : string.to_f
+    def to_i_or_f(string)
+      string.match('\.').nil? ? string.to_i : string.to_f
     end
   end
 end
