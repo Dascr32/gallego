@@ -6,5 +6,3 @@
 /db/*.sqlite3-journal
 /db/seeds_*
 .DS_Store
-/public/*.png
-/public/stylesheet/bootstrap*
