@@ -15,25 +15,22 @@ module Helpers
       LearningStyle.find(distances.key(knn(distances.values, 1).first))
     end
 
+    def compute_style_alt(values)
+      find_similar_student(values, %w(campus gender gpa))
+    end
+
     def compute_campus(values)
-      students = Student.all
-      distances = {}
+      find_similar_student(values, %w(style gender gpa))
+    end
 
-      # Get distance of style & gender (strings)
-      values[0] = to_dist(values[0])
-      values[1] = to_dist(values[1])
-
-      students.each do |student|
-        student_values = [to_dist(student.style), to_dist(student.gender), student.gpa]
-        distances[student.id] = euclidean_distance(values, student_values)
-      end
-      Student.find(distances.key(knn(distances.values, 1).first))
+    def compute_gender(values)
+      find_similar_student(values, %w(style campus gpa))
     end
 
     def euclidean_distance(vector1, vector2)
       sum = 0
       vector1.zip(vector2).each do |subset|
-        subset_nums = subset.map { |i| i.is_a?(String) ? i.to_i : i }
+        subset_nums = subset.map { |i| i.is_a?(String) ? to_f_or_i(i) : i }
         sum += subset_nums.reduce(:-)**2
       end
       Math.sqrt(sum)
@@ -43,10 +40,31 @@ module Helpers
       distances.sort { |x, y| x <=> y }.take(k)
     end
 
+    def find_similar_student(comp_vals, attr)
+      students = Student.all
+      distances = {}
+      values = [to_point(comp_vals[0]), to_point(comp_vals[1]), comp_vals[2]]
+
+      students.each do |student|
+        student_values = [to_point(student.send(attr[0])),
+                          to_point(student.send(attr[1])),
+                          student.send(attr[2])]
+
+        distances[student.id] = euclidean_distance(values, student_values)
+      end
+      Student.find(distances.key(knn(distances.values, 1).first))
+    end
+
     private
 
-    def to_dist(key)
-      STYLES_POINTS.merge(GENDERS_POINTS).fetch(key.downcase.to_sym)
+    def to_point(key)
+      STYLES_POINTS.merge(GENDERS_POINTS)
+                   .merge(CAMPUS_POINTS)
+                   .fetch(key.downcase.to_sym)
+    end
+
+    def to_f_or_i(string)
+        string.match('\.').nil? ? string.to_i : string.to_f
     end
   end
 end

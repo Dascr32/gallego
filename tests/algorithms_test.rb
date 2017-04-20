@@ -50,37 +50,63 @@ class AlgorithmsTest < Minitest::Test
 
   def test_computed_style_should_be_same
     values = [@style_a.ec, @style_a.or, @style_a.ca, @style_a.ea]
-    computed_style = compute_style(values)
+    computed = compute_style(values)
 
-    assert_equal @style_a.style, computed_style.style
+    assert_equal @style_a.style, computed.style
   end
 
   def test_computed_style_should_be_acomodador
-    computed_style = compute_style([17, 15, 15, 19])
+    computed = compute_style([17, 15, 15, 19])
 
     # Note that ec: 17, or: 15, ca: 15, ea:19
     # are very similar to set_b, so the computed style
     # should be set_b style 'acomodador'
-    assert_equal @style_b.style, computed_style.style
+    assert_equal @style_b.style, computed.style
   end
 
   def test_computed_campus_should_be_same
     values = [@student_a.style, @student_a.gender, @student_a.gpa]
-    computed_style = compute_campus(values)
+    computed = compute_campus(values)
 
-    assert_equal @student_a.campus.downcase, computed_style.campus.downcase
+    assert_equal @student_a.campus.downcase, computed.campus.downcase
   end
 
   def test_computed_campus_should_be_paraiso
-    computed_style = compute_campus(['ACOMODADOR', 'M', 7.5])
+    computed = compute_campus(['ACOMODADOR', 'M', 7.5])
 
-    assert_equal @student_b.campus.downcase, computed_style.campus.downcase
+    assert_equal @student_b.campus.downcase, computed.campus.downcase
   end
 
   def test_computed_campus_should_be_case_insensitive
-    computed_style = compute_campus(['AcomoDadoR', 'm', 7.5])
+    computed = compute_campus(['AcomoDadoR', 'm', 7.5])
 
-    assert_equal @student_b.campus.downcase, computed_style.campus.downcase
+    assert_equal @student_b.campus.downcase, computed.campus.downcase
+  end
+
+  def test_computed_gender_should_be_same
+    values = [@student_a.style, @student_a.campus, @student_a.gpa]
+    computed = compute_gender(values)
+
+    assert_equal @student_a.gender, computed.gender
+  end
+
+  def test_computed_gender_should_be_masculino
+    computed = compute_gender(['ACOMODADOR', 'PARAISO', 7.82])
+
+    assert_equal @student_b.gender, computed.gender
+  end
+
+  def test_computed_style_alt_should_be_same
+    values = [@student_a.campus, @student_a.gender, @student_a.gpa]
+    computed = compute_style_alt(values)
+
+    assert_equal @student_a.style, computed.style
+  end
+
+  def test_computed_style_alt_should_be_acomodador
+    computed = compute_style_alt(['PARAISO', 'F', 7.82])
+
+    assert_equal @student_b.style, computed.style
   end
 
   private

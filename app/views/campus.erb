@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h2>Recinto</h2>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <h3>Instrucciones</h3>
+    <p class="text-justify">
+      Seleccione su estilo de aprendizaje (puede averiguarlo <a href="/styles">aqui</a>)
+      , su último promedio de matrícula y su sexo. Apartir de esta informacion Gallego podra
+      averiguar el recinto de la UCR (Paraiso o Turrialba) donde estudia.
+    </p>
+    <hr>
+  </div>
+
+  <div class="col-md-8 col-md-offset-2">
+    <div class="well">
+      <form class="form" id="campusForm">
+        <div class="form-group">
+          <label for="learningStyleSelect">Estilo de aprendizaje</label>
+          <select class="form-control" id="learningStyleSelect">
+            <% @styles.each do |style| %>
+              <option value="<%= style %>"> <%= style.capitalize %> </option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="genderSelect">Sexo</label>
+          <select class="form-control" id="genderSelect">
+            <option value="m">Masculino</option>
+            <option value="f">Femenino</option> 
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="GpaInput">Promedio de matricula</label>
+          <input type="number" class="form-control"
+                 id="gpaInput" pattern="[-+]?[0-9]*[.,]?[0-9]+" step="0.1" placeholder="7.5" required="">
+        </div>
+
+        <button type="submit" class="btn btn-default btn-sm" id="guessCampusBtn">Averiguar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-12" id="campusSuccess">
+    <hr>
+    <h3>Su recinto es <span class="label label-success" id="campusResult"> - </span> </h3>
+    <p id="computingMessage">Computing...</p>
+  </div>
+</div>

@@ -18,7 +18,7 @@
   <div class="col-md-12">
     <form class="form-horizontal">
 
-      <% learning_styles.each do |col_name, col| %>
+      <% @styles.each do |col_name, col| %>
 
         <div class="col-md-3">
           <div class="thumbnail">
@@ -63,7 +63,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" href="#collapse-save-style-info">
-                Si lo desea puede guardar sus resultados para el mejoramiento del algoritmo y brindar resultados mas acertados
+                Si lo desea puede guardar sus resultados para el mejoramiento del algoritmo
               </a>
             </h4>
           </div>
@@ -88,7 +88,7 @@
                 </div>
 
                 <p class="help-block" id="saveResultMsg"></p>
-                <button type="button" class="btn btn-default btn-sm pull-right" id="saveResultsBtn">Enviar</button>
+                <button type="button" class="btn btn-default btn-sm" id="saveResultsBtn">Enviar</button>
               </form>
             </div>
           </div>

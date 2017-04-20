@@ -1,5 +1,8 @@
 $(document).ready(function() {
   learningStyles()
+  campus()
+  genders()
+  learningStylesAlt()
 });
 
 function learningStyles() {
@@ -28,6 +31,73 @@ function learningStyles() {
 
   $("#saveResultsBtn").click(function() {
     saveResults($("#campus").val(), colEc, colOr, colCa, colEa, $("#styleResult").text())
+  });
+}
+
+function campus() {
+  $("#campusSuccess").hide()
+
+  $("#campusForm").on('submit', function(ev){
+    ev.preventDefault();
+    $("#campusSuccess").show()
+    $("#computingMessage").show()
+
+    style = $("#learningStyleSelect").val()
+    gender = $("#genderSelect").val()
+    gpa = parseGpaValue("gpaInput")
+
+    $.post("/campus/compute.json", { style, gender, gpa })
+      .done(function(data) {
+        $("#campusSuccess").show()
+        $("#campusResult").show()
+        $("#computingMessage").hide()
+
+        $("#campusResult").text(data.campus)
+      });
+  });
+}
+
+function genders() {
+  $("#genderSuccess").hide()
+
+  $("#genderForm").on('submit', function(ev){
+    ev.preventDefault();
+    $("#genderSuccess").show()
+    $("#genderComputingMsg").show()
+
+    style = $("#genderLearningStyleSelect").val()
+    campus = $("#genderCampusSelect").val()
+    gpa = parseGpaValue("genderGpaInput")
+
+    $.post("/genders/compute.json", { style, campus, gpa })
+      .done(function(data) {
+        $("#genderSuccess").show()
+        $("#genderComputingMsg").hide()
+
+        $("#genderResult").text(data.gender == "M" ? "Masculino" : "Femenino")
+      });
+  });
+}
+
+function learningStylesAlt() {
+  $("#styleAltSuccess").hide()
+
+  $("#styleAltForm").on('submit', function(ev){
+    ev.preventDefault();
+    $("#styleAltSuccess").show()
+    $("#styleAltComputingMsg").show()
+
+    campus = $("#styleAltCampusSelect").val()
+    gender = $("#styleAltGenderSelect").val()
+    gpa = parseGpaValue("styleAltGpaInput")
+
+    $.post("/styles/compute_alt.json", { campus, gender, gpa })
+      .done(function(data) {
+        $("#styleAltSuccess").show()
+        $("#styleAltComputingMsg").hide()
+
+        $("#styleAltResult").text(data.style)
+      });
   });
 }
 
@@ -62,10 +132,6 @@ function parseColumnValue(colName, subCols) {
   return sum
 }
 
-function parseValue(colName, subCol) {
-  return parseInt($("#" + colName + "-" + subCol).val())
-}
-
 function getLearningStyle(ec, or, ca, ea) {
   $.post("/styles/compute.json", { ec: ec, or: or, ca: ca, ea: ea })
     .done(function(data) {
@@ -81,11 +147,25 @@ function getLearningStyle(ec, or, ca, ea) {
 function saveResults(campus, ec, or, ca, ea, style) {
   ca_ec = ca - ec
   ea_or = ea - or
-  payload = {campus, ec, or, ca, ea, ca_ec, ea_or, style}
+  payload = { campus, ec, or, ca, ea, ca_ec, ea_or, style }
 
   $.post("/styles/save.json", payload)
     .done(function(data) {
       $("#saveResultMsg").show()
       $("#saveResultMsg").text(data.code == "201" ? "Resultados guardados correctamente" : "Ocurrio un error intente mas tarde")
     });
+}
+
+function parseValue(colName, subCol) {
+  return parseInt($("#" + colName + "-" + subCol).val())
+}
+
+function parseGpaValue(id) {
+  // Suport GPA with format 75 or 7.5
+  num = Number($("#" + id).val())
+
+  if (num % 10 === 0)
+    num /= 10
+
+  return num
 }
