@@ -7,4 +7,3 @@
 /db/seeds_*
 .DS_Store
 /public/*.png
-/public/stylesheet/bootstrap*
