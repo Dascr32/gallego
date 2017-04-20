@@ -1,8 +1,11 @@
+// This went from a small js file to a monster real quick
+// Best thing is to make it rails-style, but 'ain't nobody have time for that'
 $(document).ready(function() {
   learningStyles()
   campus()
   genders()
   learningStylesAlt()
+  professors()
 });
 
 function learningStyles() {
@@ -101,6 +104,34 @@ function learningStylesAlt() {
   });
 }
 
+function professors() {
+  $("#profSuccess").hide()
+
+  $("#guessProfBtn").click(function() {
+    $("#profSuccess").show()
+    $("#profComputingMsg").show()
+
+    age = parseRadioValue("age")
+    gender = parseRadioValue("gender")
+    c = parseRadioValue("eval")
+    d = parseRadioValue("teachTimes")
+    e = parseRadioValue("background")
+    f = parseRadioValue("pcSkills")
+    g = parseRadioValue("webTech")
+    h = parseRadioValue("webSites")
+
+    payload = {age, gender, c, d, e, f, g, h}
+    
+    $.post("/professors/compute.json", payload)
+      .done(function(data) {
+        $("#profSuccess").show()
+        $("#profComputingMsg").hide()
+
+        $("#profResult").text(data.category)
+      });
+  });
+}
+
 function calcStyleColumn (colName) {
   args = {};
   switch(colName) {
@@ -168,4 +199,8 @@ function parseGpaValue(id) {
     num /= 10
 
   return num
+}
+
+function parseRadioValue(id) {
+  return $("input[name=" + id + "Radio]:checked", "#profForm").val()
 }

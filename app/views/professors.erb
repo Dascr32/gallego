@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-md-12">
+     <div class="page-header">
+       <h2>Nivel de Profesor</h2>
+     </div>
+   </div>
+
+   <div class="col-md-12">
+     <h3>Instrucciones</h3>
+     <p class="text-justify">
+       En esta seccion Gallego podra identificar a cual nivel de profesor pertenece segun sus habilidades 
+       (principiante, intermedio o avanzado). Solo debe completar el formulario que aparece abajo.
+     </p>
+     <hr>
+   </div>
+
+   <div class="col-md-12">
+    <form class="form" id="profForm">
+      <div class="col-md-6" id="profAge">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>Edad</h4>
+            <label class="radio-inline"><input type="radio" name="ageRadio" value="1" checked>Menor a 30 años</label>
+            <label class="radio-inline"><input type="radio" name="ageRadio" value="2">Entre 30 y 55 años</label>
+            <label class="radio-inline"><input type="radio" name="ageRadio" value="3">Mayor a 55 años</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profGender">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>Sexo</h4>
+            <label class="radio-inline"><input type="radio" name="genderRadio" value="m" checked>Masculino</label>
+            <label class="radio-inline"><input type="radio" name="genderRadio" value="f">Femenino</label>
+            <label class="radio-inline"><input type="radio" name="genderRadio" value="NA">N/A</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profAutoEval">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿Que nivel de profesor cree que tiene usted?</h4>
+            <label class="radio-inline"><input type="radio" name="evalRadio" value="b" checked>Principiante</label>
+            <label class="radio-inline"><input type="radio" name="evalRadio" value="i">Intermedio</label>
+            <label class="radio-inline"><input type="radio" name="evalRadio" value="a">Avanzado</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profTeachTimes">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿Cuantas veces a impartido cursos?</h4>
+            <label class="radio-inline"><input type="radio" name="teachTimesRadio" value="1" checked>Nunca</label>
+            <label class="radio-inline"><input type="radio" name="teachTimesRadio" value="2">1 a 5 veces</label>
+            <label class="radio-inline"><input type="radio" name="teachTimesRadio" value="3">Mas de 5 veces</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profbackground">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿De que diciplina proviene?</h4>
+            <label class="radio-inline"><input type="radio" name="backgroundRadio" value="dm" checked>Toma de decisiones</label>
+            <label class="radio-inline"><input type="radio" name="backgroundRadio" value="nd">Network Design</label>
+            <label class="radio-inline"><input type="radio" name="backgroundRadio" value="o">Otro</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profPcSkills">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿Que tan buenas son sus habilidades con las computadoras?</h4>
+            <label class="radio-inline"><input type="radio" name="pcSkillsRadio" value="l" checked>Bajas</label>
+            <label class="radio-inline"><input type="radio" name="pcSkillsRadio" value="a">Promedias</label>
+            <label class="radio-inline"><input type="radio" name="pcSkillsRadio" value="h">Altas</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profWebTech">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿Con que frecuencia utiliza las tecnologias web?</h4>
+            <label class="radio-inline"><input type="radio" name="webTechRadio" value="n" checked>Nunca</label>
+            <label class="radio-inline"><input type="radio" name="webTechRadio" value="s">A veces</label>
+            <label class="radio-inline"><input type="radio" name="webTechRadio" value="o">Mucho</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" id="profWebSites">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>¿Con que frecuencia utiliza sitios web?</h4>
+            <label class="radio-inline"><input type="radio" name="webSitesRadio" value="n" checked>Nunca</label>
+            <label class="radio-inline"><input type="radio" name="webSitesRadio" value="s">A veces</label>
+            <label class="radio-inline"><input type="radio" name="webSitesRadio" value="o">Mucho</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-default btn-sm" id="guessProfBtn">Averiguar</button>
+    </form>
+
+    <div id="profSuccess">
+      <hr>
+      <h3>Su nivel de profesor es <span class="label label-success" id="profResult"> - </span> </h3>
+      <p id="profComputingMsg">Computing...</p>
+    </div>
+   </div>
+</div>

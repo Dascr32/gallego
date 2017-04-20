@@ -52,4 +52,12 @@ post '/genders/compute.json' do
   json compute_gender([params[:style], params[:campus], params[:gpa]])
 end
 
+get '/professors' do
+  erb :professors
+end
 
+post '/professors/compute.json' do
+  json compute_professor([params[:age], params[:gender], params[:c],
+                         params[:d], params[:e], params[:f], 
+                         params[:g], params[:h]])
+end

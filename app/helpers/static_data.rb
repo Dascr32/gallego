@@ -19,6 +19,22 @@ module Helpers
       turrialba: 0.5
     }.freeze
 
+    PROFESSORS_POINTS = {
+      f: 0,
+      m: 0.5,
+      na: 0.10,
+      b: 0.15,
+      i: 0.20,
+      a: 0.25,
+      dm: 0.30,
+      nd: 0.35,
+      l: 0.45,
+      h: 0.55,
+      n: 0.60,
+      s: 0.65,
+      o: 0.70
+    }.freeze
+
     def learning_styles
       opts = YAML.load_file('public/ls_options.yml')
       { ec: opts['ec'], or: opts['or'], ca: opts['ca'], ea: opts['ea'] }

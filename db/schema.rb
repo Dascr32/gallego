@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414044513) do
+ActiveRecord::Schema.define(version: 20170420201917) do
 
   create_table "learning_styles", force: :cascade do |t|
     t.string  "campus"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20170414044513) do
     t.integer "ca_ec"
     t.integer "ea_or"
     t.string  "style"
+  end
+
+  create_table "professors", force: :cascade do |t|
+    t.integer "age"
+    t.string  "gender"
+    t.string  "self_avaluation"
+    t.integer "times_teaching"
+    t.string  "background"
+    t.string  "skills_with_pc"
+    t.string  "exp_with_web_tech"
+    t.string  "exp_with_web_sites"
+    t.string  "category"
   end
 
   create_table "students", force: :cascade do |t|
