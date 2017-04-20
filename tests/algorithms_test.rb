@@ -28,7 +28,7 @@ class AlgorithmsTest < Minitest::Test
     vector1 = [1, 2, 3]
     vector2 = [4, 0, -3]
 
-    assert_equal euclidean_distance(vector1, vector2), 7
+    assert_equal 7, euclidean_distance(vector1, vector2)
   end
 
   def test_knn
@@ -43,16 +43,16 @@ class AlgorithmsTest < Minitest::Test
 
     nearest_two_neighbors = knn(distances, 2)
 
-    assert_equal nearest_two_neighbors.count, 2
-    assert_in_delta nearest_two_neighbors[0], 6.480
-    assert_in_delta nearest_two_neighbors[1], 9.055
+    assert_equal 2, nearest_two_neighbors.count
+    assert_in_delta 6.480, nearest_two_neighbors[0]
+    assert_in_delta 9.055, nearest_two_neighbors[1]
   end
 
   def test_computed_style_should_be_same
     values = [@style_a.ec, @style_a.or, @style_a.ca, @style_a.ea]
     computed_style = compute_style(values)
 
-    assert_equal computed_style.style, @style_a.style
+    assert_equal @style_a.style, computed_style.style
   end
 
   def test_computed_style_should_be_acomodador
@@ -61,26 +61,26 @@ class AlgorithmsTest < Minitest::Test
     # Note that ec: 17, or: 15, ca: 15, ea:19
     # are very similar to set_b, so the computed style
     # should be set_b style 'acomodador'
-    assert_equal computed_style.style, @style_b.style
+    assert_equal @style_b.style, computed_style.style
   end
 
   def test_computed_campus_should_be_same
     values = [@student_a.style, @student_a.gender, @student_a.gpa]
     computed_style = compute_campus(values)
 
-    assert_equal computed_style.campus.downcase, @student_a.campus.downcase
+    assert_equal @student_a.campus.downcase, computed_style.campus.downcase
   end
 
   def test_computed_campus_should_be_paraiso
     computed_style = compute_campus(['ACOMODADOR', 'M', 7.5])
 
-    assert_equal computed_style.campus.downcase, @student_b.campus.downcase
+    assert_equal @student_b.campus.downcase, computed_style.campus.downcase
   end
 
   def test_computed_campus_should_be_case_insensitive
     computed_style = compute_campus(['AcomoDadoR', 'm', 7.5])
 
-    assert_equal computed_style.campus.downcase, @student_b.campus.downcase
+    assert_equal @student_b.campus.downcase, computed_style.campus.downcase
   end
 
   private
