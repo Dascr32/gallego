@@ -53,5 +53,12 @@ module Helpers
     def genders_points
       GENDERS_POINTS
     end
+
+    def total_records
+      sum = LearningStyle.count(:all)
+      sum += Student.count(:all)
+      sum += Professor.count(:all)
+      sum + Network.count(:all)
+    end
   end
 end

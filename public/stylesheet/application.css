@@ -27,3 +27,17 @@ body {
 #guessNetBtn {
   margin-top: 20px;
 }
+
+.counter-showcase {
+  text-align: center;
+}
+
+.counter-showcase i {
+  color: #E4E4E4;
+  font-size: 45px;
+}
+
+.counter-showcase span {
+  font-size: 40px;
+  color: #93C54B;
+}

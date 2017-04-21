@@ -1,4 +1,6 @@
 get '/' do
+  sum = total_records
+  @total_records = sum
   erb :index
 end
 
