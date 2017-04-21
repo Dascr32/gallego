@@ -2,6 +2,10 @@ get '/' do
   erb :index
 end
 
+get '/about' do
+  erb :about
+end
+
 get '/styles' do
   @styles = learning_styles
   erb :styles
