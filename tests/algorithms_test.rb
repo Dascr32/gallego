@@ -175,7 +175,6 @@ class AlgorithmsTest < Minitest::Test
 
     set_b = Network.create(reliability: 4, links: 18,
                            capacity: 'Medium', cost: 'High', category: 'B')
-
     set_a.save
     set_b.save
     [set_a.reload, set_b.reload]
