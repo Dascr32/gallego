@@ -1,6 +1,11 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 
   background-image: url(../bg.png);
   background-repeat: repeat;
@@ -17,4 +22,8 @@ body {
 
 .thumbnail select {
   margin-left: 10px;
+}
+
+#guessNetBtn {
+  margin-top: 20px;
 }

@@ -6,6 +6,7 @@ $(document).ready(function() {
   genders()
   learningStylesAlt()
   professors()
+  networks()
 });
 
 function learningStyles() {
@@ -111,14 +112,14 @@ function professors() {
     $("#profSuccess").show()
     $("#profComputingMsg").show()
 
-    age = parseRadioValue("age")
-    gender = parseRadioValue("gender")
-    c = parseRadioValue("eval")
-    d = parseRadioValue("teachTimes")
-    e = parseRadioValue("background")
-    f = parseRadioValue("pcSkills")
-    g = parseRadioValue("webTech")
-    h = parseRadioValue("webSites")
+    age = parseRadioValue("age", "profForm")
+    gender = parseRadioValue("gender", "profForm")
+    c = parseRadioValue("eval", "profForm")
+    d = parseRadioValue("teachTimes", "profForm")
+    e = parseRadioValue("background", "profForm")
+    f = parseRadioValue("pcSkills", "profForm")
+    g = parseRadioValue("webTech", "profForm")
+    h = parseRadioValue("webSites", "profForm")
 
     payload = {age, gender, c, d, e, f, g, h}
     
@@ -128,6 +129,30 @@ function professors() {
         $("#profComputingMsg").hide()
 
         $("#profResult").text(data.category)
+      });
+  });
+}
+
+function networks() {
+  $("#netSuccess").hide()
+
+  $("#guessNetBtn").click(function() {
+    $("#netSuccess").show()
+    $("#netComputingMsg").show()
+
+    reliability = $("#netReliability").val()
+    links = $("#netLinks").val()
+    capacity = parseRadioValue("netCapacity", "netForm")
+    cost = parseRadioValue("netCost", "netForm")
+
+    payload = {reliability, links, capacity, cost}
+    
+    $.post("/networks/compute.json", payload)
+      .done(function(data) {
+        $("#netSuccess").show()
+        $("#netComputingMsg").hide()
+
+        $("#netResult").text(data.category)
       });
   });
 }
@@ -201,6 +226,6 @@ function parseGpaValue(id) {
   return num
 }
 
-function parseRadioValue(id) {
-  return $("input[name=" + id + "Radio]:checked", "#profForm").val()
+function parseRadioValue(id, form) {
+  return $("input[name=" + id + "Radio]:checked", "#" + form).val()
 }

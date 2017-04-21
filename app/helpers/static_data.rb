@@ -35,6 +35,12 @@ module Helpers
       o: 0.70
     }.freeze
 
+    NETWORKS_POINTS = {
+      low: 0,
+      medium: 0.5,
+      high: 0.10
+    }.freeze
+
     def learning_styles
       opts = YAML.load_file('public/ls_options.yml')
       { ec: opts['ec'], or: opts['or'], ca: opts['ca'], ea: opts['ea'] }

@@ -17,21 +17,12 @@ post '/styles/compute_alt.json' do
 end
 
 post '/styles/save.json' do
-  @style = LearningStyle.create(campus: params[:campus],
-                                ec:     params[:ec],
-                                or:     params[:or],
-                                ca:     params[:ca],
-                                ea:     params[:ea],
-                                ca_ec:  params[:ca_ec],
-                                ea_or:  params[:ea_or],
-                                style:  params[:style])
-  response = if @style.save
-               { code: 201, status: 'created' }
-             else
-               { code: 400, status: 'error' }
-             end
+  @style = LearningStyle.create(campus: params[:campus], ec: params[:ec],
+                                or: params[:or], ca: params[:ca],
+                                ea: params[:ea], ca_ec: params[:ca_ec],
+                                ea_or: params[:ea_or], style: params[:style])
 
-  json response
+  json @style.save ? { code: 201 } : { code: 400 }
 end
 
 get '/campus' do
@@ -58,6 +49,15 @@ end
 
 post '/professors/compute.json' do
   json compute_professor([params[:age], params[:gender], params[:c],
-                         params[:d], params[:e], params[:f], 
-                         params[:g], params[:h]])
+                          params[:d], params[:e], params[:f],
+                          params[:g], params[:h]])
+end
+
+get '/networks' do
+  erb :networks
+end
+
+post '/networks/compute.json' do
+  json compute_network([params[:reliability], params[:links], 
+                        params[:capacity], params[:cost]])
 end
