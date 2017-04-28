@@ -217,12 +217,9 @@ function parseValue(colName, subCol) {
 }
 
 function parseGpaValue(id) {
-  // Suport GPA with format 75 or 7.5
   num = Number($("#" + id).val())
-
-  if (num % 10 === 0)
+  if (num % 1 === 0)
     num /= 10
-
   return num
 }
 
