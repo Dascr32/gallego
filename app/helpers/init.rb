@@ -6,3 +6,9 @@ Gallego.helpers Helpers::StaticData
 
 require_relative 'algorithms'
 Gallego.helpers Helpers::Algorithms
+
+require_relative 'euclidean'
+Gallego.helpers Helpers::Euclidean
+
+require_relative 'routes'
+Gallego.helpers Helpers::Routes

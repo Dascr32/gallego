@@ -1,6 +1,5 @@
 get '/' do
-  sum = total_records
-  @total_records = sum
+  @total_records = total_records
   erb :index
 end
 
@@ -14,11 +13,11 @@ get '/styles' do
 end
 
 post '/styles/compute.json' do
-  json compute_style([params[:ec], params[:or], params[:ca], params[:ea]])
+  json euclidean.style([params[:ec], params[:or], params[:ca], params[:ea]])
 end
 
 post '/styles/compute_alt.json' do
-  json compute_style_alt([params[:campus], params[:gender], params[:gpa]])
+  json euclidean.style_alt([params[:campus], params[:gender], params[:gpa]])
 end
 
 post '/styles/save.json' do
@@ -36,7 +35,7 @@ get '/campus' do
 end
 
 post '/campus/compute.json' do
-  json compute_campus([params[:style], params[:gender], params[:gpa]])
+  json euclidean.campus([params[:style], params[:gender], params[:gpa]])
 end
 
 get '/misc' do
@@ -45,7 +44,7 @@ get '/misc' do
 end
 
 post '/genders/compute.json' do
-  json compute_gender([params[:style], params[:campus], params[:gpa]])
+  json euclidean.gender([params[:style], params[:campus], params[:gpa]])
 end
 
 get '/professors' do
@@ -53,7 +52,7 @@ get '/professors' do
 end
 
 post '/professors/compute.json' do
-  json compute_professor([params[:age], params[:gender], params[:c],
+  json euclidean.professor([params[:age], params[:gender], params[:c],
                           params[:d], params[:e], params[:f],
                           params[:g], params[:h]])
 end
@@ -63,6 +62,6 @@ get '/networks' do
 end
 
 post '/networks/compute.json' do
-  json compute_network([params[:reliability], params[:links], 
+  json euclidean.network([params[:reliability], params[:links], 
                         params[:capacity], params[:cost]])
 end

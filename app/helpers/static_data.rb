@@ -3,10 +3,10 @@ module Helpers
   module StaticData
     # Points for euclidean distances
     STYLES_POINTS = {
-      divergente: 0,
+      divergente:  0,
       convergente: 0.5,
-      asimilador: 0.10,
-      acomodador: 0.15
+      asimilador:  0.10,
+      acomodador:  0.15
     }.freeze
 
     GENDERS_POINTS = {
@@ -15,30 +15,30 @@ module Helpers
     }.freeze
 
     CAMPUS_POINTS = {
-      paraiso: 0,
+      paraiso:   0,
       turrialba: 0.5
     }.freeze
 
     PROFESSORS_POINTS = {
-      f: 0,
-      m: 0.5,
+      f:  0,
+      m:  0.5,
       na: 0.10,
-      b: 0.15,
-      i: 0.20,
-      a: 0.25,
+      b:  0.15,
+      i:  0.20,
+      a:  0.25,
       dm: 0.30,
       nd: 0.35,
-      l: 0.45,
-      h: 0.55,
-      n: 0.60,
-      s: 0.65,
-      o: 0.70
+      l:  0.45,
+      h:  0.55,
+      n:  0.60,
+      s:  0.65,
+      o:  0.70
     }.freeze
 
     NETWORKS_POINTS = {
-      low: 0,
+      low:    0,
       medium: 0.5,
-      high: 0.10
+      high:   0.10
     }.freeze
 
     def learning_styles
