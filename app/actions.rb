@@ -53,8 +53,8 @@ end
 
 post '/professors/compute.json' do
   json euclidean.professor([params[:age], params[:gender], params[:c],
-                          params[:d], params[:e], params[:f],
-                          params[:g], params[:h]])
+                            params[:d], params[:e], params[:f],
+                            params[:g], params[:h]])
 end
 
 get '/networks' do
@@ -62,6 +62,6 @@ get '/networks' do
 end
 
 post '/networks/compute.json' do
-  json euclidean.network([params[:reliability], params[:links], 
-                        params[:capacity], params[:cost]])
+  json euclidean.network([params[:reliability], params[:links],
+                          params[:capacity], params[:cost]])
 end

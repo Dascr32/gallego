@@ -15,8 +15,8 @@ class AlgorithmsTest < Minitest::Test
   def setup
     @style_a, @style_b = create_style_dataset
     @student_a, @student_b = create_student_dataset
-    @prof_a = create_professor_dataset.first
-    @net_a = create_network_dataset.first
+    @prof_a = create_professor_dataset
+    @net_a = create_network_dataset
   end
 
   def teardown
@@ -26,6 +26,30 @@ class AlgorithmsTest < Minitest::Test
     @student_b.destroy
     @prof_a.destroy
     @net_a.destroy
+  end
+
+  def test_euclidean_distance
+    vector1 = [1, 2, 3]
+    vector2 = [4, 0, -3]
+
+    assert_equal 7, EuclideanDistance.distance(vector1, vector2)
+  end
+
+  def test_knn
+    train_dataset = [[1, 2, 3], [4, 0, -3], [5, 9, 0]]
+    sample = [2, 6, 8]
+    # Distances for train_dataset: 6.480, 12.688, 9.055
+    distances = []
+
+    train_dataset.each_with_index do |set, index|
+      distances[index] = EuclideanDistance.distance(set, sample)
+    end
+
+    nearest_two_neighbors = EuclideanDistance.knn(distances, 2)
+
+    assert_equal 2, nearest_two_neighbors.count
+    assert_in_delta 6.480, nearest_two_neighbors[0]
+    assert_in_delta 9.055, nearest_two_neighbors[1]
   end
 
   def test_computed_style_should_be_same
@@ -135,24 +159,14 @@ class AlgorithmsTest < Minitest::Test
                              times_teaching: 1, background: 'ND',
                              skills_with_pc: 'A', exp_with_web_tech: 'N',
                              exp_with_web_sites: 'S', category: 'Beginner')
-
-    set_b = Professor.create(age: 2, gender: 'F', self_avaluation: 'I',
-                             times_teaching: 3, background: 'O',
-                             skills_with_pc: 'H', exp_with_web_tech: 'S',
-                             exp_with_web_sites: 'O', category: 'Advanced')
     set_a.save
-    set_b.save
-    [set_a.reload, set_b.reload]
+    set_a.reload
   end
 
   def create_network_dataset
     set_a = Network.create(reliability: 2, links: 7,
                            capacity: 'High', cost: 'High', category: 'A')
-
-    set_b = Network.create(reliability: 4, links: 18,
-                           capacity: 'Medium', cost: 'High', category: 'B')
     set_a.save
-    set_b.save
-    [set_a.reload, set_b.reload]
+    set_a.reload
   end
 end
