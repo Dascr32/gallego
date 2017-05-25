@@ -31,6 +31,6 @@ class AlgorithmsTest < Minitest::Test
   def test_classification
     element = { reliability: 2, links: 10, capacity: 'Medium', cost: 'Medium' }
     category = @nbayes.classify(element)
-    assert_equal 'A', category[0]
+    assert_equal 'A', category[:category]
   end
 end

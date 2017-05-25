@@ -66,7 +66,7 @@ module Helpers
           probs = element.map { |k, v| @probs.fetch(prob_id(k, v, c), 1) }.reduce(:*)
           class_prob[c] = (category_count(c).to_f / @dataset.count) * probs
         end
-        [class_prob.key(class_prob.values.max), class_prob.values.max]
+        { category: class_prob.key(class_prob.values.max), prob: class_prob.values.max }
       end
 
       def prob_values(attr:, val:, category:)

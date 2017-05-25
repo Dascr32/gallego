@@ -10,5 +10,8 @@ Gallego.helpers Helpers::Algorithms
 require_relative 'euclidean'
 Gallego.helpers Helpers::Euclidean
 
+require_relative 'nbayes'
+Gallego.helpers Helpers::NBayes
+
 require_relative 'routes'
 Gallego.helpers Helpers::Routes

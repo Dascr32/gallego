@@ -3,5 +3,9 @@ module Helpers
     def euclidean
       Helpers::Euclidean::Compute
     end
+
+    def nbayes
+      Helpers::NBayes::Compute
+    end
   end
 end

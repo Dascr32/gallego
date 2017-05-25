@@ -8,8 +8,8 @@ gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
 
 gem 'puma'
-gem 'tux'
 gem 'redis', '~> 3.3'
+gem 'tux'
 
 # These gems are only installed when run as
 # `bundle install --without production`

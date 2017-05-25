@@ -49,14 +49,16 @@ function campus() {
     style = $("#learningStyleSelect").val()
     gender = $("#genderSelect").val()
     gpa = parseGpaValue("gpaInput")
+    algo = algorithmToUse()
 
-    $.post("/campus/compute.json", { style, gender, gpa })
+    $.post("/campus/compute.json", { style, gender, gpa, algo })
       .done(function(data) {
         $("#campusSuccess").show()
         $("#campusResult").show()
         $("#computingMessage").hide()
 
-        $("#campusResult").text(data.campus)
+        result = data.campus != null ? data.campus : data.category
+        $("#campusResult").text(result)
       });
   });
 }
@@ -72,13 +74,15 @@ function genders() {
     style = $("#genderLearningStyleSelect").val()
     campus = $("#genderCampusSelect").val()
     gpa = parseGpaValue("genderGpaInput")
+    algo = algorithmToUse()
 
-    $.post("/genders/compute.json", { style, campus, gpa })
+    $.post("/genders/compute.json", { style, campus, gpa, algo })
       .done(function(data) {
         $("#genderSuccess").show()
         $("#genderComputingMsg").hide()
 
-        $("#genderResult").text(data.gender == "M" ? "Masculino" : "Femenino")
+        result = data.gender != null ? data.gender : data.category
+        $("#genderResult").text(result == "M" ? "Masculino" : "Femenino")
       });
   });
 }
@@ -94,13 +98,15 @@ function learningStylesAlt() {
     campus = $("#styleAltCampusSelect").val()
     gender = $("#styleAltGenderSelect").val()
     gpa = parseGpaValue("styleAltGpaInput")
+    algo = algorithmToUse()
 
-    $.post("/styles/compute_alt.json", { campus, gender, gpa })
+    $.post("/styles/compute_alt.json", { campus, gender, gpa, algo })
       .done(function(data) {
         $("#styleAltSuccess").show()
         $("#styleAltComputingMsg").hide()
 
-        $("#styleAltResult").text(data.style)
+        result = data.style != null ? data.style : data.category
+        $("#styleAltResult").text(result)
       });
   });
 }
@@ -120,8 +126,9 @@ function professors() {
     f = parseRadioValue("pcSkills", "profForm")
     g = parseRadioValue("webTech", "profForm")
     h = parseRadioValue("webSites", "profForm")
+    algo = algorithmToUse()
 
-    payload = {age, gender, c, d, e, f, g, h}
+    payload = {age, gender, c, d, e, f, g, h, algo}
     
     $.post("/professors/compute.json", payload)
       .done(function(data) {
@@ -144,8 +151,9 @@ function networks() {
     links = $("#netLinks").val()
     capacity = parseRadioValue("netCapacity", "netForm")
     cost = parseRadioValue("netCost", "netForm")
+    algo = algorithmToUse()
 
-    payload = {reliability, links, capacity, cost}
+    payload = {reliability, links, capacity, cost, algo}
     
     $.post("/networks/compute.json", payload)
       .done(function(data) {
@@ -189,14 +197,18 @@ function parseColumnValue(colName, subCols) {
 }
 
 function getLearningStyle(ec, or, ca, ea) {
-  $.post("/styles/compute.json", { ec: ec, or: or, ca: ca, ea: ea })
+  payload = { ec: ec, or: or, ca: ca, ea: ea, algo: algorithmToUse() }
+
+  $.post("/styles/compute.json", payload)
     .done(function(data) {
       $("#computingMessage").hide()
 
       // Scroll and show result
       $("#successInfo").show()
       $("html, body").animate({scrollTop: $('#successInfo').offset().top}, "slow");
-      $("#styleResult").text(data.style)
+
+      result = data.style != null ? data.style : data.category
+      $("#styleResult").text(result)
     });
 }
 
@@ -225,4 +237,8 @@ function parseGpaValue(id) {
 
 function parseRadioValue(id, form) {
   return $("input[name=" + id + "Radio]:checked", "#" + form).val()
+}
+
+function algorithmToUse() {
+  return $("#algorithmSelect").val()
 }

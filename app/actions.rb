@@ -12,12 +12,38 @@ get '/styles' do
   erb :styles
 end
 
+get '/campus' do
+  @styles = styles_points.keys
+  erb :campus
+end
+
+get '/misc' do
+  @styles = styles_points.keys
+  erb :misc
+end
+
+get '/professors' do
+  erb :professors
+end
+
+get '/networks' do
+  erb :networks
+end
+
 post '/styles/compute.json' do
-  json euclidean.style([params[:ec], params[:or], params[:ca], params[:ea]])
+  if params[:algo] == 'nbayes'
+    json nbayes.style(params)
+  else
+    json euclidean.style([params[:ec], params[:or], params[:ca], params[:ea]])
+  end
 end
 
 post '/styles/compute_alt.json' do
-  json euclidean.style_alt([params[:campus], params[:gender], params[:gpa]])
+  if params[:algo] == 'nbayes'
+    json nbayes.style_alt(params)
+  else
+    json euclidean.style_alt([params[:campus], params[:gender], params[:gpa]])
+  end
 end
 
 post '/styles/save.json' do
@@ -29,39 +55,37 @@ post '/styles/save.json' do
   json @style.save ? { code: 201 } : { code: 400 }
 end
 
-get '/campus' do
-  @styles = styles_points.keys
-  erb :campus
-end
-
 post '/campus/compute.json' do
-  json euclidean.campus([params[:style], params[:gender], params[:gpa]])
-end
-
-get '/misc' do
-  @styles = styles_points.keys
-  erb :misc
+  if params[:algo] == 'nbayes'
+    json nbayes.campus(params)
+  else
+    json euclidean.campus([params[:style], params[:gender], params[:gpa]])
+  end
 end
 
 post '/genders/compute.json' do
-  json euclidean.gender([params[:style], params[:campus], params[:gpa]])
-end
-
-get '/professors' do
-  erb :professors
+  if params[:algo] == 'nbayes'
+    json nbayes.gender(params)
+  else
+    json euclidean.gender([params[:style], params[:campus], params[:gpa]])
+  end
 end
 
 post '/professors/compute.json' do
-  json euclidean.professor([params[:age], params[:gender], params[:c],
-                            params[:d], params[:e], params[:f],
-                            params[:g], params[:h]])
-end
-
-get '/networks' do
-  erb :networks
+  if params[:algo] == 'nbayes'
+    json nbayes.professor(params)
+  else
+    json euclidean.professor([params[:age], params[:gender], params[:c],
+                              params[:d], params[:e], params[:f],
+                              params[:g], params[:h]])
+  end
 end
 
 post '/networks/compute.json' do
-  json euclidean.network([params[:reliability], params[:links],
-                          params[:capacity], params[:cost]])
+  if params[:algo] == 'nbayes'
+    json nbayes.network(params)
+  else
+    json euclidean.network([params[:reliability], params[:links],
+                            params[:capacity], params[:cost]])
+  end
 end

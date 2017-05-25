@@ -22,6 +22,10 @@
       <%= partial :navbar %>
       <div class="panel">
         <div class="panel-body">
+          <select class="pull-right algorithm-select" id="algorithmSelect">
+            <option value="nbayes">Bayes</option>
+            <option value="euclidean">Distancias Euclideanas</option>
+          </select>
           <%= yield %>
         </div>
       </div>
